@@ -4,10 +4,72 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" style.css />
+    <link rel="stylesheet" href="/style.css" />
     <title>TOP Library</title>
   </head>
   <body>
+    <div class="container">
+      <div class="header">
+        <h1>Library</h1>
+      </div>
+
+      <div class="books-container">
+        <div class="btn-container">
+          <button>add book</button>
+        </div>
+        <div class="books">
+          <div class="book">
+            <h3>title</h3>
+            <p>author</p>
+            <p>64 pages</p>
+            <p>read</p>
+          </div>
+          <div class="book">
+            <h3>another one</h3>
+            <p>another author</p>
+            <p>100 pages</p>
+            <p>read</p>
+          </div>
+          <div class="book">
+            <h3>another one</h3>
+            <p>another author</p>
+            <p>100 pages</p>
+            <p>read</p>
+          </div>
+          <div class="book">
+            <h3>another one</h3>
+            <p>another author</p>
+            <p>100 pages</p>
+            <p>read</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-div">
+      <form class="book-form">
+        <h4>add a book</h4>
+
+        <div>
+          <input type="text" name="title" id="title" placeholder="book title" />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="author"
+            id="author"
+            placeholder="book author"
+          />
+        </div>
+        <div>
+          <input type="number" name="pages" id="pages" placeholder="pages" />
+        </div>
+        <div>
+          have you read this book?
+          <input type="checkbox" name="read" id="read" />
+        </div>
+        <button type="submit">submit</button>
+      </form>
+    </div>
     <script src="/script.js" />
   </body>
 </html>
