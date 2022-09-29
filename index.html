@@ -15,7 +15,7 @@
 
       <div class="books-container">
         <div class="btn-container">
-          <button>add book</button>
+          <button class="add-book">add book</button>
         </div>
         <div class="books">
           <div class="book">
@@ -23,24 +23,7 @@
             <p>author</p>
             <p>64 pages</p>
             <p>read</p>
-          </div>
-          <div class="book">
-            <h3>another one</h3>
-            <p>another author</p>
-            <p>100 pages</p>
-            <p>read</p>
-          </div>
-          <div class="book">
-            <h3>another one</h3>
-            <p>another author</p>
-            <p>100 pages</p>
-            <p>read</p>
-          </div>
-          <div class="book">
-            <h3>another one</h3>
-            <p>another author</p>
-            <p>100 pages</p>
-            <p>read</p>
+            <button>delete</button>
           </div>
         </div>
       </div>
@@ -50,7 +33,13 @@
         <h4>add a book</h4>
 
         <div>
-          <input type="text" name="title" id="title" placeholder="book title" />
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="book title"
+            required
+          />
         </div>
         <div>
           <input
@@ -58,10 +47,17 @@
             name="author"
             id="author"
             placeholder="book author"
+            required
           />
         </div>
         <div>
-          <input type="number" name="pages" id="pages" placeholder="pages" />
+          <input
+            type="number"
+            name="pages"
+            id="pages"
+            placeholder="pages"
+            required
+          />
         </div>
         <div>
           have you read this book?
