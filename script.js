@@ -82,9 +82,11 @@ function displayBooks() {
     btn.classList.add("delete");
     btnDiv.appendChild(readBtn);
     btnDiv.appendChild(btn);
-    btn.setAttribute("data-position", i);
-    btn.addEventListener("click", (e) => deleteBook(e));
 
+    btn.addEventListener("click", (e) => deleteBook(e));
+    readBtn.addEventListener("click", (e) => toggleRead(e));
+
+    book.setAttribute("data-position", i);
     book.appendChild(title);
     book.appendChild(author);
     book.appendChild(pages);
@@ -94,8 +96,21 @@ function displayBooks() {
   }
 }
 
+function toggleRead(e) {
+  const idx = e.path[2].attributes["data-position"].value;
+
+  let book = myLibrary[idx];
+  if (book.read === true) {
+    book.read = false;
+  } else {
+    book.read = true;
+  }
+  clearBookGrid();
+  displayBooks();
+}
+
 function deleteBook(e) {
-  const idx = e.target.attributes["data-position"].value;
+  const idx = e.path[2].attributes["data-position"].value;
   myLibrary.splice(idx, 1);
   clearBookGrid();
   displayBooks();
