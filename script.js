@@ -8,6 +8,23 @@ const addBookBtn = document.querySelector(".add-book");
 
 const booksGrid = document.querySelector(".books");
 
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+  toggleRead = function () {
+    if (this.read) {
+      this.read = false;
+    } else {
+      this.read = true;
+    }
+    return;
+  };
+}
+
 const form = document.querySelector("form");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -35,22 +52,6 @@ let myLibrary = [
   new Book("this how title looks", "this is the author", 0, false),
   new Book("things fall apart", "chinua achebe", 321, true),
 ];
-
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
-
-Book.prototype.toggleRead = function () {
-  if (this.read) {
-    this.read = false;
-  } else {
-    this.read = true;
-  }
-  return;
-};
 
 function addBookToLibrary(book) {
   myLibrary = [...myLibrary, book];
