@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>TOP Library</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Library</h1>
+      </div>
+
+      <div class="books-container">
+        <div class="btn-container">
+          <button class="add-book">add book</button>
+        </div>
+        <div class="books">
+          <!-- <div class="book">
+            <h3>title</h3>
+            <p>author</p>
+            <p>64 pages</p>
+            <p>read</p>
+            <button>delete</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="form-div">
+      <form class="book-form">
+        <h4>add a book</h4>
+
+        <div>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="book title"
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="author"
+            id="author"
+            placeholder="book author"
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="number"
+            name="pages"
+            id="pages"
+            placeholder="pages"
+            required
+          />
+        </div>
+        <div>
+          have you read this book?
+          <input type="checkbox" name="read" id="read" />
+        </div>
+        <button type="submit">submit</button>
+      </form>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
