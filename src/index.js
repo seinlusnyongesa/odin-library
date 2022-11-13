@@ -1,3 +1,18 @@
+import app from "./firebase-config";
+import {
+  getFirestore,
+  collection,
+  query,
+  getDocs,
+  deleteDoc,
+  doc,
+  updateDoc,
+  getDoc,
+  addDoc,
+} from "firebase/firestore";
+
+const db = getFirestore(app);
+
 //form div
 const formDiv = document.querySelector(".form-div");
 
@@ -53,8 +68,13 @@ let myLibrary = [
   new Book("things fall apart", "chinua achebe", 321, true),
 ];
 
-function addBookToLibrary(book) {
-  myLibrary = [...myLibrary, book];
+async function addBookToLibrary(book) {
+  await addDoc(collection(db, "books"), {
+    title: book.title,
+    author: book.author,
+    pages: book.pages,
+    read: book.read,
+  });
 }
 
 function clearForm() {
@@ -64,21 +84,24 @@ function clearForm() {
   form.elements["read"].checked = false;
 }
 
-function displayBooks() {
-  for (let i = 0; i < myLibrary.length; i++) {
+async function displayBooks() {
+  const q = query(collection(db, "books"));
+  const qsnap = await getDocs(q);
+  qsnap.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
     let book = document.createElement("div");
     book.classList.add("book");
     let title = document.createElement("h3");
     let author = document.createElement("p");
     let pages = document.createElement("p");
     let readBtn = document.createElement("button");
-    btn = document.createElement("button");
+    let btn = document.createElement("button");
     let btnDiv = document.createElement("div");
-    title.innerText = myLibrary[i].title;
-    author.innerText = `by ${myLibrary[i].author}`;
-    pages.innerText = `${myLibrary[i].pages} pages`;
-    readBtn.innerText = `${myLibrary[i].read ? "read" : "not read"}`;
-    readBtn.classList.add(`${myLibrary[i].read ? "read" : "notread"}`);
+    title.innerText = doc.data().title;
+    author.innerText = `by ${doc.data().author}`;
+    pages.innerText = `${doc.data().pages} pages`;
+    readBtn.innerText = `${doc.data().read ? "read" : "not read"}`;
+    readBtn.classList.add(`${doc.data().read ? "read" : "notread"}`);
     btn.innerText = "delete";
     btn.classList.add("delete");
     btnDiv.appendChild(readBtn);
@@ -87,32 +110,36 @@ function displayBooks() {
     btn.addEventListener("click", (e) => deleteBook(e));
     readBtn.addEventListener("click", (e) => toggleRead(e));
 
-    book.setAttribute("data-position", i);
+    book.setAttribute("data-position", doc.id);
     book.appendChild(title);
     book.appendChild(author);
     book.appendChild(pages);
     book.appendChild(btnDiv);
 
     booksGrid.appendChild(book);
-  }
+  });
 }
 
-function toggleRead(e) {
+async function toggleRead(e) {
   const idx = e.path[2].attributes["data-position"].value;
 
-  let book = myLibrary[idx];
-  if (book.read === true) {
-    book.read = false;
-  } else {
-    book.read = true;
-  }
+  const docRef = doc(db, "books", idx);
+  const docSnap = await getDoc(docRef);
+
+  const bookData = docSnap.data();
+
+  updateDoc(docRef, { read: bookData.read ? false : true });
+
   clearBookGrid();
   displayBooks();
 }
 
-function deleteBook(e) {
+async function deleteBook(e) {
   const idx = e.path[2].attributes["data-position"].value;
-  myLibrary.splice(idx, 1);
+
+  let bookRef = doc(db, "books", idx);
+  await deleteDoc(bookRef);
+
   clearBookGrid();
   displayBooks();
 }
